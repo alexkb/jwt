@@ -68,13 +68,13 @@ class JWT
                 return JWT::sign($input, $key, $algo) === $signature;
 
             case 'RS256':
-                return (boolean) openssl_verify($input, $signature, $key, OPENSSL_ALGO_SHA256);
+                return (boolean) openssl_verify($input, $signature, $key, 'SHA256');
 
             case 'RS384':
-                return (boolean) openssl_verify($input, $signature, $key, OPENSSL_ALGO_SHA384);
+                return (boolean) openssl_verify($input, $signature, $key, 'SHA384');
 
             case 'RS512':
-                return (boolean) openssl_verify($input, $signature, $key, OPENSSL_ALGO_SHA512);
+                return (boolean) openssl_verify($input, $signature, $key, 'SHA512');
 
             default:
                 throw new Exception("Unsupported or invalid signing algorithm.");
@@ -95,13 +95,13 @@ class JWT
                 return hash_hmac('sha512', $input, $key, true);
 
             case 'RS256':
-                return JWT::generateRSASignature($input, $key, OPENSSL_ALGO_SHA256);
+                return JWT::generateRSASignature($input, $key, 'SHA256');
 
             case 'RS384':
-                return JWT::generateRSASignature($input, $key, OPENSSL_ALGO_SHA384);
+                return JWT::generateRSASignature($input, $key, 'SHA384');
 
             case 'RS512':
-                return JWT::generateRSASignature($input, $key, OPENSSL_ALGO_SHA512);
+                return JWT::generateRSASignature($input, $key, 'SHA512');
 
             default:
                 throw new Exception("Unsupported or invalid signing algorithm.");
